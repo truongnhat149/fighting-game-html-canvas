@@ -1,0 +1,67 @@
+* {
+    
+    box-sizing: border-box;
+}
+
+#red-container {
+    position: relative;
+    display: inline-block;
+}
+
+#red-container-size-m {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+}
+
+#player-health {
+    position: relative;
+    display: flex;
+    height: 30px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+#player-health-after {
+    background-color: yellow;
+    height: 30px;
+    width: 100%;
+}
+
+#player-health-before {
+    position: absolute;
+    background: blue;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#timer {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+#enemy-health {
+    position: relative;
+    height: 30px;
+    width: 100%;
+}
+
+#enemy-health-after {
+    background-color: yellow;
+    height: 30px;
+}
+
+#enemy-health-before {
+    position: absolute;
+    background: blue;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}   

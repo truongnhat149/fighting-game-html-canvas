@@ -4,9 +4,12 @@ canvas.width = 1024;
 canvas.height = 576;
 const gravity = 0.7;
 const valueVelocityDefault = 0;
-const jumpVelocity = -20;
+const jumpVelocity  = -20;
 const rightVelocity = 5;
-const leftVelocity = -5;
+const leftVelocity  = -5;
+const healthBlood = 20;
+const playerHealth = document.querySelector('#player-health-before');
+const enemyHealth = document.querySelector('#enemy-health-before');
 
 const keys = {
     a: {
@@ -44,6 +47,7 @@ class Sprite {
         },
         this.color = color;
         this.isAttacking;
+        this.health = 100;
     }
 
     draw() {
@@ -160,7 +164,8 @@ function animate() {
         player.isAttacking
     ) {
         player.isAttacking = false;
-        console.log('player is attacking');
+        enemy.health -= healthBlood;
+        enemyHealth.style.width = enemy.health + '%';
     };
 
     if (
@@ -171,7 +176,8 @@ function animate() {
         enemy.isAttacking
     ) {
         enemy.isAttacking = false;
-        console.log('enemy is attacking');
+        player.health -= healthBlood;
+        playerHealth.style.width = player.health + '%';
     }
 };
 
