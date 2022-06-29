@@ -10,6 +10,11 @@ const leftVelocity  = -5;
 const healthBlood = 20;
 const playerHealth = document.querySelector('#player-health-before');
 const enemyHealth = document.querySelector('#enemy-health-before');
+const displayText = document.querySelector('#display-text');
+const displayTime = document.querySelector('#timer');
+
+let timer = 60;
+let timerId;
 
 const keys = {
     a: {
@@ -118,6 +123,33 @@ const enemy = new Sprite({
     },
 });
 
+// determine
+function determineWinner({ player, enemy, timerId}) {
+    clearTimeout(timerId);
+    displayText.style.display = 'flex';
+    if (player.health === enemy.health) {
+        displayText.innerHTML = 'Tie';
+    } else if (player.health > enemy.health) {
+        displayText.innerHTML = 'Player 1 Wins';
+    } else if (player.health < enemy.health) {
+        displayText.innerHTML = 'Player 2 Wins';
+    }
+};
+
+// decrease timers
+function decreaseTimer() {
+    if (timer > 0) {
+        timerId = setTimeout(decreaseTimer , 1000);
+        timer--;
+        displayTime.innerHTML = timer;
+    };
+
+    if (timer === 0) {
+        determineWinner({ player, enemy, timerId });
+    };
+};
+
+// attack regular
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
         rectangle1.attackBox.position.x + rectangle1.attackBox.width >=
@@ -146,14 +178,14 @@ function animate() {
         player.velocity.x = leftVelocity;
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = rightVelocity;   
-    }
+    };
 
     // enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = leftVelocity;
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = rightVelocity;
-    }
+    };
 
     // detect for collision
     if (
@@ -178,10 +210,13 @@ function animate() {
         enemy.isAttacking = false;
         player.health -= healthBlood;
         playerHealth.style.width = player.health + '%';
+    };
+
+    // end game based on health
+    if (enemy.health <= 0 || player.health <= 0) {
+        determineWinner({ player, enemy, timerId });
     }
 };
-
-animate();
 
   // event listeners
 window.addEventListener('keydown', (event) => {
@@ -239,3 +274,6 @@ window.addEventListener('keyup', (event) => {
             break;
     }
 });
+
+animate();
+decreaseTimer();
