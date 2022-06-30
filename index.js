@@ -66,6 +66,13 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
+    imageSrc: './assets/img/samuraiMack/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 157,
+    },
 });
 
 const enemy = new Fighter({
@@ -93,7 +100,7 @@ function animate() {
     background.update();
     shop.update();
     player.update();
-    enemy.update();
+    // enemy.update();
 
     player.velocity.x = valueVelocityDefault;
     enemy.velocity.x = valueVelocityDefault;
