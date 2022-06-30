@@ -9,13 +9,13 @@
 ## Guide
 - Timer : 60s
 
-- Player 1: 
+### Player 1: 
 + Push : d
 + Back: a
 + Jump: w
 + Attack: z
 
-- Player 2:
+### Player 2:
 + Jump : ArrowUp
 + Push : ArrowRight
 + Back: ArrowLeft
