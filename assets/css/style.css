@@ -2,9 +2,14 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 20px 176px;
+}
+
 #red-container {
     position: relative;
     display: inline-block;
+    
 }
 
 #red-container-size-m {
