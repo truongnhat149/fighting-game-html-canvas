@@ -24,6 +24,8 @@ const arrowLeft = 'ArrowLeft';
 const arrowUp = 'ArrowUp';
 const keyD = 'd';
 const keyA = 'a';
+const keyW = 'w';
+const keyZ = 'z';
 
 // animation
 const JUMP = 'jump';

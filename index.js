@@ -5,10 +5,16 @@ const keys = {
     d: {
         pressed: false
     },
+    w: {
+        pressed: false
+    },
     ArrowRight: {
         pressed: false
     },
     ArrowLeft: {
+        pressed: false
+    },
+    ArrowUp: {
         pressed: false
     },
 };
@@ -276,10 +282,10 @@ window.addEventListener('keydown', (event) => {
             keys.a.pressed = true;
             player.lastKey = keyA;
         break;
-        case 'w':
+        case keyW:
             player.velocity.y = jumpVelocity;
         break;
-        case 'z':
+        case keyZ:
             player.attack();
         break;
     };
@@ -287,7 +293,7 @@ window.addEventListener('keydown', (event) => {
 
     // event enemy
     if (!enemy.dead) {
-    switch (event.key.toLowerCase()) {
+    switch (event.key) {
         case arrowRight:
             keys.ArrowRight.pressed = true;
             enemy.lastKey = arrowRight;
@@ -314,14 +320,20 @@ window.addEventListener('keyup', (event) => {
         case keyA:
             keys.a.pressed = false;
             break;
+        case keyW:
+            keys.w.pressed = false;
+            break;
     };
 
-    switch (event.key.toLowerCase()) {
+    switch (event.key) {
         case arrowRight:
             keys.ArrowRight.pressed = false;
             break;
         case arrowLeft:
             keys.ArrowLeft.pressed = false;
+            break;
+        case arrowUp:
+            keys.ArrowUp.pressed = false;
             break;
     }
 });
