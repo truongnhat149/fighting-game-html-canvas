@@ -98,6 +98,10 @@ const player = new Fighter({
             imageSrc: './assets/img/samuraiMack/Take Hit - white silhouette.png',
             framesMax: 4,
         },
+        death: {
+            imageSrc: './assets/img/samuraiMack/Death.png',
+            framesMax: 6,
+        },
     },
     attackBox: {
         offset: {
@@ -155,6 +159,10 @@ const enemy = new Fighter({
         takeHit: {
             imageSrc: './assets/img/kenji/Take hit.png',
             framesMax: 3,
+        },
+        death: {
+            imageSrc: './assets/img/kenji/Death.png',
+            framesMax: 7,
         },
     },
     attackBox: {
@@ -266,8 +274,9 @@ function animate() {
 
   // event listeners
 window.addEventListener('keydown', (event) => {
+    // event player
+    if (!player.dead) {
     switch (event.key) {
-        // event player
         case 'd':
             keys.d.pressed = true;
             player.lastKey = 'd';
@@ -282,8 +291,12 @@ window.addEventListener('keydown', (event) => {
         case 'z':
             player.attack();
         break;
+    };
+    };
 
-        // event enemy
+    // event enemy
+    if (!enemy.dead) {
+    switch (event.key) {
         case 'ArrowRight':
             keys.ArrowRight.pressed = true;
             enemy.lastKey = 'ArrowRight';
@@ -298,6 +311,7 @@ window.addEventListener('keydown', (event) => {
         case '/':
             enemy.attack();
         break;
+    };
     };
 });
 
