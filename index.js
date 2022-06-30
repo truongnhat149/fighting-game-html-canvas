@@ -179,7 +179,7 @@ const enemy = new Fighter({
 function animate() {
     // background 
     window.requestAnimationFrame(animate);
-    canvasContext.fillStyle = 'black';
+    canvasContext.fillStyle = 'rgba(255, 255, 255, 0.15)';
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
     background.update();
     shop.update();
@@ -238,7 +238,12 @@ function animate() {
     ) {
         enemy.takeHit();
         player.isAttacking = false;
-        enemyHealth.style.width = enemy.health + '%';
+        // enemyHealth.style.width = enemy.health + '%';
+        gsap.to('#enemy-health-before',
+            {
+                width: enemy.health + '%',
+            }
+        );
     };
 
     // if player misses
@@ -257,7 +262,12 @@ function animate() {
     ) {
         player.takeHit();
         enemy.isAttacking = false;
-        playerHealth.style.width = player.health + '%';
+        // playerHealth.style.width = player.health + '%';
+        gsap.to('#player-health-before',
+            {
+                width: player.health + '%',
+            }
+        );
     };
 
     // if enemy misses
