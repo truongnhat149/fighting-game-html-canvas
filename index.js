@@ -90,6 +90,10 @@ const player = new Fighter({
             imageSrc: './assets/img/samuraiMack/Fall.png',
             framesMax: 2,
         },
+        attack2: {
+            imageSrc: './assets/img/samuraiMack/Attack2.png',
+            framesMax: 6,
+        },
     },
 
 });
@@ -108,6 +112,35 @@ const enemy = new Fighter({
         x: -50,
         y: 0,
     },
+    imageSrc: './assets/img/kenji/Idle.png',
+    framesMax: 4,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 167,
+    },
+    sprites: { // animation
+        idle: {
+            imageSrc: './assets/img/kenji/Idle.png',
+            framesMax: 4,
+        },
+        run: {
+            imageSrc: './assets/img/kenji/Run.png',
+            framesMax: 8,
+        },
+        jump: {
+            imageSrc: './assets/img/kenji/Jump.png',
+            framesMax: 2,
+        },
+        fall: {
+            imageSrc: './assets/img/kenji/Fall.png',
+            framesMax: 2,
+        },
+        attack2: {
+            imageSrc: './assets/img/kenji/Attack1.png',
+            framesMax: 4,
+        },
+    },
 });
 
 
@@ -119,7 +152,7 @@ function animate() {
     background.update();
     shop.update();
     player.update();
-    // enemy.update();
+    enemy.update();
 
     player.velocity.x = valueVelocityDefault;
     enemy.velocity.x = valueVelocityDefault;
@@ -143,13 +176,25 @@ function animate() {
         player.switchSprite('fall');
     }
 
+
     // enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = leftVelocity;
+        enemy.switchSprite('run');
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = rightVelocity;
-    };
+        enemy.switchSprite('run');
+    } else {
+        enemy.switchSprite('idle');
+    }; 
 
+    // enemy jump
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump');
+    } else if (enemy.velocity.y > 0) {
+        enemy.switchSprite('fall');
+    }
+    
     // detect for collision
     if (
         rectangularCollision({
