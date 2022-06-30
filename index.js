@@ -8,6 +8,7 @@ const jumpVelocity  = -20;
 const rightVelocity = 5;
 const leftVelocity  = -5;
 const healthBlood = 20;
+const upFrame = 96; // standing on the frame
 const playerHealth = document.querySelector('#player-health-before');
 const enemyHealth = document.querySelector('#enemy-health-before');
 const displayText = document.querySelector('#display-text');
@@ -40,6 +41,16 @@ const background = new Sprite({
         y: 0,
     },
     imageSrc: './assets/img/background.png',
+});
+
+const shop = new Sprite({
+    position : {
+        x: 600,
+        y: 128
+    },
+    imageSrc: './assets/img/shop.png',
+    scale: 2.75,
+    framesMax: 6,
 });
 
 const player = new Fighter({
@@ -80,6 +91,7 @@ function animate() {
     canvasContext.fillStyle = 'black';
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
     background.update();
+    shop.update();
     player.update();
     enemy.update();
 
